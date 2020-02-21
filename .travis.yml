@@ -4,20 +4,18 @@ services:
   - docker
 
 script:
-    - docker build -t antoniuk02/multi-client ./client
-    - docker build -t antoniuk02/multi-server ./server
-    - docker build -t antoniuk02/multi-worker ./worker
-    - docker build -t antoniuk02/multi-nginx ./nginx
+    - docker build -t antoniuk02/image-searcher-angular ./client
+    - docker build -t antoniuk02/image-searcher-nest ./server
+    - docker build -t antoniuk02/image-searcher-nginx ./worker
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push antoniuk02/multi-client
-    - docker push antoniuk02/multi-server
-    - docker push antoniuk02/multi-nginx
-    - docker push antoniuk02/multi-worker
+    - docker push antoniuk02/image-searcher-angular
+    - docker push antoniuk02/image-searcher-nest
+    - docker push antoniuk02/image-searcher-nginx
   
 deploy: 
   provider: elasticbeanstalk
   region: us-east-2
-  app: docker-react
+  app: image-searcher
   env: MultiDocker-env
   bucket-name: elasticbeanstalk-us-east-2-991075679647
   bucket_path: docker-multi
