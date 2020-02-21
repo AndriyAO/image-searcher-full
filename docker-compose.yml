@@ -1,0 +1,25 @@
+version: '3'
+services: 
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: nginx
+    ports:
+      - '4200:80'
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: iamge-searcher
+    environment:
+        - PORT=3000
+        - DATA_STORAGE=./
+        - COLLECTION_USERS='user'
+        - COLLECTION_LIKES='like'
+        - COLLECTION_HISTORY='history'
+        - GIF_API_KEY=QPxKSYo3WJEJFqGf2pFnTKCQJ74ttDER
+        - JWT_SECRET_KEY=secret
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: fe-image-searcher

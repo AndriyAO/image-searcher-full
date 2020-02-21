@@ -1,0 +1,32 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "antoniuk02/image_searcher_angular",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "server",
+      "image": "antoniuk02/image_searcher_nest",
+      "hostname": "api",
+      "essential": false,
+      "memory": 128 
+    },
+    {
+      "name": "nginx",
+      "image": "antoniuk02/image_searcher_nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        } 
+      ],
+      "links": ["server", "client"]
+    }
+  ]
+}
