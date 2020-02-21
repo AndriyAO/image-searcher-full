@@ -2,15 +2,6 @@ os: linux
 language: node_js
 services:
   - docker
-
-script:
-    - docker build -t antoniuk02/image-searcher-angular ./fe-image-searcher
-    - docker build -t antoniuk02/image-searcher-nest ./image-searcher
-    - docker build -t antoniuk02/image-searcher-nginx ./nginx
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push antoniuk02/image-searcher-angular
-    - docker push antoniuk02/image-searcher-nest
-    - docker push antoniuk02/image-searcher-nginx
   
 deploy: 
   provider: elasticbeanstalk
